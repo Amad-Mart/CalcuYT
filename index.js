@@ -61,8 +61,29 @@ class Calculator{
         this.previousOperand = ''
     }
 
+    //this method formats numbers with proper commas
     getDisplayNumber(number){
-        return number
+        //stringNumber is argument in string form
+        const stringNumber = number.toString()
+        //this takes string, turn into an array, first num in array are the int values before the . 
+        //and the second part are the int values is after
+        const integerDigits = parseFloat(stringNumber.split('.')[0])
+        //this holds the values after . 
+        const decimalDigits = stringNumber.split('.')[1]
+        let integerDisplay
+        if(isNaN(integerDigits)){
+            integerDigits = ''
+        }
+        else{
+            integerDisplay = integerDigits.toLocaleString('en', {
+                maximumFractionDigits: 0
+            })
+        }
+        if(decimalDigits != null){
+            return `${integerDisplay}.${decimalDigits}`
+        } else{
+            return integerDisplay
+        }
     }
 
     updateDisplay(){
