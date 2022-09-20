@@ -14,18 +14,31 @@ class Calculator{
     delete(){
 
     }
+    
     appendNumber(number){
         if(number === '.' && this.currentOperand.includes('.')) return
         this.currentOperand = this.currentOperand.toString() + number.toString()
     }
-    chooseOperation(operation){
 
+    chooseOperation(operation){
+        //checks if user entered a number before using an operand
+        if(this.currentOperand === '') return
+        //if user has already entered an operand it will call compute() that result before adding new operand
+        if(this.previousOperand !== ''){
+            this.compute()
+        }
+        this.operation = operation
+        this.previousOperand = this.currentOperand
+        this.currentOperand = ''
     }
+
     compute(){
 
     }
+
     updateDisplay(){
         this.currentOperandTextElement.innerText = this.currentOperand
+        this.previousOperandTextElement.innerText = this.previousOperand
     }
 }
 
