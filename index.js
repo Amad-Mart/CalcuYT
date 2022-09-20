@@ -33,7 +33,31 @@ class Calculator{
     }
 
     compute(){
-
+        let computation
+        const prev = parseFloat(this.previousOperand)
+        const current = parseFloat(this.currentOperand)
+        //ensure user has entered a number
+        if(isNaN(prev) || isNaN(current)) return
+        //switch allows multiple conditions on a single object, such as this.operation
+        switch(this.operation){
+            case '+':
+                computation = prev + current
+                break
+            case '-':
+                computation = prev - current
+                break
+            case '*':
+                computation = prev * current
+                break
+            case '÷':
+                computation = prev / current
+                break
+            default: 
+                return
+        }
+        this.currentOperand = computation
+        this.operation = undefined
+        this.previousOperand = ''
     }
 
     updateDisplay(){
@@ -68,4 +92,9 @@ operationButtons.forEach(button => {
         calculator.chooseOperation(button.innerText)
         calculator.updateDisplay()
     })
+})
+
+equalButton.addEventListener('click', button => {
+    calculator.compute()
+    calculator.updateDisplay()
 })
